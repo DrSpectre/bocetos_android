@@ -28,6 +28,7 @@ class ObjetoCompacto(var cajon_texto: String,
 ): Serializable {}
 
 class MainActivity : AppCompatActivity() {
+    // PARA calcular la distancia tomando en cuenta la esfericidad: https://www.deformasymapas.com/blog/post/2/
     lateinit var boton_para_cambiar_de_pantalla: Button
     lateinit var cajon_de_texto: TextInputEditText
 
