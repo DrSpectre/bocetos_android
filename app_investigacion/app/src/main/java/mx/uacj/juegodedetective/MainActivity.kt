@@ -130,6 +130,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun cuando_tengamos_permisos_para_GPS(){
+        
 
     }
 
