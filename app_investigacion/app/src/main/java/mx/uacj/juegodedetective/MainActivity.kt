@@ -3,9 +3,14 @@ package mx.uacj.juegodedetective
 import android.content.Intent
 import android.Manifest
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
+
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -13,11 +18,17 @@ import androidx.core.content.PackageManagerCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.Granularity
 import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import mx.uacj.juegodedetective.pantallas.PantallaPistas
 import java.io.Serializable
+import java.util.concurrent.PriorityBlockingQueue
 
 
 //TODO: https://www.youtube.com/watch?v=oqrbggPlASs
@@ -31,6 +42,9 @@ class MainActivity : AppCompatActivity() {
     // PARA calcular la distancia tomando en cuenta la esfericidad: https://www.deformasymapas.com/blog/post/2/
     lateinit var boton_para_cambiar_de_pantalla: Button
     lateinit var cajon_de_texto: TextInputEditText
+
+    lateinit var cajon_texto_latitud: TextView
+    lateinit var cajon_texto_longitud: TextView
 
 
     // Variables para controlar el GPS
@@ -52,6 +66,12 @@ class MainActivity : AppCompatActivity() {
         inicializar_sensores()
 
         inicializar_botones()
+        inicializar_relaciones_con_interfaz()
+    }
+
+    fun inicializar_relaciones_con_interfaz(){
+        cajon_texto_latitud = findViewById(R.id.latitud_texto)
+        cajon_texto_longitud = findViewById(R.id.longitud_texto)
     }
 
     fun inicializar_botones(){
@@ -130,8 +150,59 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun cuando_tengamos_permisos_para_GPS(){
-        
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        try{
+            fusedLocationClient.lastLocation.addOnSuccessListener {
+                if(it == null){
+                    Toast.makeText(
+                            this,
+                            "No se puede obtener la ubicacion",
+                            Toast.LENGTH_LONG
+                        )
+                        .show()
+                }
+                else {
+                    // TODO: implementar la funcion de abajo
+                    imprime_la_ubicacion_obtenida(it)
+                }
+            }
 
+            val peticion_de_ubicacion = LocationRequest.Builder(
+                Priority.PRIORITY_HIGH_ACCURACY,
+                3000
+            ).apply {
+                setGranularity(Granularity.GRANULARITY_PERMISSION_LEVEL)
+                setWaitForAccurateLocation(true)
+            }.build()
+
+            cuando_obtengamos_coordenadas_que_hacer = object: LocationCallback(){
+                override fun onLocationResult(ubicaciones_obtenidas: LocationResult) {
+                    super.onLocationResult(ubicaciones_obtenidas)
+
+                    for(ubicacion in ubicaciones_obtenidas.locations){
+                        imprime_la_ubicacion_obtenida(ubicacion)
+                    }
+                }
+            }
+
+            fusedLocationClient.requestLocationUpdates(
+                peticion_de_ubicacion,
+                cuando_obtengamos_coordenadas_que_hacer,
+                Looper.getMainLooper()
+            )
+
+        }
+        catch (error_interno: SecurityException){
+            Log.v("ERROR_DE_SEGURIDAD", error_interno.message.toString())
+            // Haz nada
+        }
+    }
+
+    fun imprime_la_ubicacion_obtenida(ubicacion: Location){
+        cajon_texto_latitud.text = "${ubicacion.latitude}"
+        cajon_texto_longitud.text = "${ubicacion.longitude}"
+
+        Log.v("COORDENADAS", "lat: ${ubicacion.latitude} long: ${ubicacion.longitude}")
     }
 
 }
