@@ -26,6 +26,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import mx.uacj.juegodedetective.controladores.ProveedorDePistas
 import mx.uacj.juegodedetective.pantallas.PantallaPistas
 import java.io.Serializable
 import java.util.concurrent.PriorityBlockingQueue
@@ -45,6 +46,8 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var cajon_texto_latitud: TextView
     lateinit var cajon_texto_longitud: TextView
+
+    var pistas_para_jugar: ProveedorDePistas = ProveedorDePistas()
 
 
     // Variables para controlar el GPS
@@ -67,6 +70,11 @@ class MainActivity : AppCompatActivity() {
 
         inicializar_botones()
         inicializar_relaciones_con_interfaz()
+        inicializar_proveedores()
+    }
+
+    private fun inicializar_proveedores() {
+        pistas_para_jugar.inicializar_juego()
     }
 
     fun inicializar_relaciones_con_interfaz(){
