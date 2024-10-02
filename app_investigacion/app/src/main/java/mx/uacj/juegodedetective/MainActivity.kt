@@ -27,6 +27,7 @@ import com.google.android.gms.location.Priority
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import mx.uacj.juegodedetective.controladores.ProveedorDePistas
+import mx.uacj.juegodedetective.modelo.InformacionPista
 import mx.uacj.juegodedetective.pantallas.PantallaPistas
 import java.io.Serializable
 import java.util.concurrent.PriorityBlockingQueue
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var cajon_texto_longitud: TextView
 
     var pistas_para_jugar: ProveedorDePistas = ProveedorDePistas()
+    var pista_mas_cercana: InformacionPista? = null
 
 
     // Variables para controlar el GPS
@@ -66,11 +68,13 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        inicializar_proveedores()
+
         inicializar_sensores()
 
-        inicializar_botones()
         inicializar_relaciones_con_interfaz()
-        inicializar_proveedores()
+        inicializar_botones()
+
     }
 
     private fun inicializar_proveedores() {
@@ -78,33 +82,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun inicializar_relaciones_con_interfaz(){
+        boton_para_cambiar_de_pantalla = findViewById(R.id.mover_a_pantalla)
+        cajon_de_texto = findViewById(R.id.cajon_de_texto)
+
         cajon_texto_latitud = findViewById(R.id.latitud_texto)
         cajon_texto_longitud = findViewById(R.id.longitud_texto)
     }
 
     fun inicializar_botones(){
-        boton_para_cambiar_de_pantalla = findViewById(R.id.mover_a_pantalla)
-
-        cajon_de_texto = findViewById(R.id.cajon_de_texto)
-
         boton_para_cambiar_de_pantalla.setOnClickListener {
             var intento_para_cambiar_pantalla = Intent(this, PantallaPistas::class.java)
 
-            Log.v("VAmos viendo dijo el ciego", cajon_de_texto.editableText.toString())
+            if(pista_mas_cercana != null){
+                intento_para_cambiar_pantalla.putExtra("pista_a_pintar", pista_mas_cercana)
 
-            intento_para_cambiar_pantalla.putExtra("texto_que_te_envio", cajon_de_texto.editableText.toString())
-
-            val objeto_a_enviar_a_otra_pantalla = ObjetoCompacto(
-                    cajon_de_texto.editableText.toString(),
-                    "ContraseñaSegura1234",
-                "anonkun@yopmail.com",
-                )
-
-            intento_para_cambiar_pantalla.putExtra("paquete_que_te_envio_de_datos", objeto_a_enviar_a_otra_pantalla)
-
-
-
-            this.startActivity(intento_para_cambiar_pantalla)
+                this.startActivity(intento_para_cambiar_pantalla)
+            }
         }
 
     }
@@ -171,7 +164,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 else {
                     // TODO: implementar la funcion de abajo
-                    imprime_la_ubicacion_obtenida(it)
+                    identifica_la_pista_mas_cercana(it)
                 }
             }
 
@@ -188,7 +181,7 @@ class MainActivity : AppCompatActivity() {
                     super.onLocationResult(ubicaciones_obtenidas)
 
                     for(ubicacion in ubicaciones_obtenidas.locations){
-                        imprime_la_ubicacion_obtenida(ubicacion)
+                        identifica_la_pista_mas_cercana(ubicacion)
                     }
                 }
             }
@@ -206,11 +199,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun imprime_la_ubicacion_obtenida(ubicacion: Location){
+    fun identifica_la_pista_mas_cercana(ubicacion: Location){
         cajon_texto_latitud.text = "${ubicacion.latitude}"
         cajon_texto_longitud.text = "${ubicacion.longitude}"
 
+
+        pista_mas_cercana = pistas_para_jugar.ubicar_pista_mas_cercana(ubicacion)
+        Log.v("PISTA_CERCANA", "${pista_mas_cercana}")
+
         Log.v("COORDENADAS", "lat: ${ubicacion.latitude} long: ${ubicacion.longitude}")
+
+
     }
 
 }

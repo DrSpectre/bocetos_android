@@ -5,7 +5,7 @@ import mx.uacj.juegodedetective.modelo.InformacionPista
 import mx.uacj.juegodedetective.modelo.UbicacionPista
 
 class ProveedorDePistas( ) {
-    lateinit var arreglo_de_pistas: ArrayList<InformacionPista>
+    var arreglo_de_pistas: ArrayList<InformacionPista> = arrayListOf()
 
     fun ubicar_pista_mas_cercana(ubicacion: Location): InformacionPista{
         // TODO para el miercoles

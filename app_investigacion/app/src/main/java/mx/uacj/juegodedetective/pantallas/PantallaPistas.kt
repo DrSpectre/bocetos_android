@@ -9,11 +9,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import mx.uacj.juegodedetective.ObjetoCompacto
 import mx.uacj.juegodedetective.R
+import mx.uacj.juegodedetective.modelo.InformacionPista
 import java.io.Serializable
 
 class PantallaPistas : AppCompatActivity() {
     lateinit var cajon_de_texto_pantalla_anterior: TextView
-    lateinit var informacion_recibida: ObjetoCompacto
+    lateinit var informacion_de_la_pista_cercana: InformacionPista
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,14 +26,6 @@ class PantallaPistas : AppCompatActivity() {
             insets
         }
 
-        Log.v("MensajeSegundaPantalla", intent.getStringExtra("texto_que_te_envio") ?: "Parece que no llego nada")
-
-        //Log.v("Mensaje", intent.getStringExtra("cajon_anterior_de_texto") ?: "")
-
-        //val serializado = intent.getSerializableExtra("paquete") as prueba
-
-        //Log.v("Mensaje",  serializado.nombre)
-
         recibir_informacion_pantalla_anterior()
 
         inicializar_interfaz()
@@ -41,15 +34,15 @@ class PantallaPistas : AppCompatActivity() {
     }
 
     fun recibir_informacion_pantalla_anterior(){
-        var datos_recibidos: ObjetoCompacto
-        datos_recibidos = intent.getSerializableExtra("paquete_que_te_envio_de_datos") as ObjetoCompacto
-        informacion_recibida = datos_recibidos
+        var datos_recibidos: InformacionPista
+        datos_recibidos = intent.getSerializableExtra("pista_a_pintar") as InformacionPista
+        informacion_de_la_pista_cercana = datos_recibidos
     }
 
     fun inicializar_interfaz(){
         cajon_de_texto_pantalla_anterior = findViewById(R.id.caja_texto)
 
-        cajon_de_texto_pantalla_anterior.text = informacion_recibida.cajon_texto
+        cajon_de_texto_pantalla_anterior.text = informacion_de_la_pista_cercana.informacion
     }
 
 }
