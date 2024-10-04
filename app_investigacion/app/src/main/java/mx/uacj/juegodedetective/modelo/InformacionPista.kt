@@ -4,6 +4,6 @@ import java.io.Serializable
 
 data class InformacionPista(
     var informacion: String,
-    var imagen: String,
+    var imagen: Int,
     var ubicacion: UbicacionPista
 ) : Serializable {}

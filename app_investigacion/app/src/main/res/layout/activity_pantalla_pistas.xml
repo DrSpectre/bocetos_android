@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".pantallas.PantallaPistas">
 
+    <ImageView
+        android:id="@+id/lugar_para_la_imagen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        android:scaleType="centerCrop"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="5dp"
+        tools:srcCompat="@drawable/lake" />
+
     <TextView
         android:id="@+id/caja_texto"
         android:layout_width="wrap_content"
@@ -16,5 +27,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

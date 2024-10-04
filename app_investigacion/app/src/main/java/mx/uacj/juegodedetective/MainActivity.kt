@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var cajon_texto_latitud: TextView
     lateinit var cajon_texto_longitud: TextView
+    lateinit var cajon_texto_altitud: TextView
 
     var pistas_para_jugar: ProveedorDePistas = ProveedorDePistas()
     var pista_mas_cercana: InformacionPista? = null
@@ -87,6 +88,7 @@ class MainActivity : AppCompatActivity() {
 
         cajon_texto_latitud = findViewById(R.id.latitud_texto)
         cajon_texto_longitud = findViewById(R.id.longitud_texto)
+        cajon_texto_altitud = findViewById(R.id.altitud_texto)
     }
 
     fun inicializar_botones(){
@@ -113,6 +115,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         val arreglo_de_permisos = arreglo_permisos.toTypedArray()
+
         if(tenemos_permisos_actualmente(arreglo_de_permisos)){
             tenemos_permisos_para_el_GPS = true
             cuando_tengamos_permisos_para_GPS()
@@ -202,9 +205,11 @@ class MainActivity : AppCompatActivity() {
     fun identifica_la_pista_mas_cercana(ubicacion: Location){
         cajon_texto_latitud.text = "${ubicacion.latitude}"
         cajon_texto_longitud.text = "${ubicacion.longitude}"
+        cajon_texto_altitud.text = "${ubicacion.altitude}"
 
 
-        pista_mas_cercana = pistas_para_jugar.ubicar_pista_mas_cercana(ubicacion)
+
+        pista_mas_cercana = pistas_para_jugar.ubicar_pista_mas_cercana(ubicacion, 50.0f)
         Log.v("PISTA_CERCANA", "${pista_mas_cercana}")
 
         Log.v("COORDENADAS", "lat: ${ubicacion.latitude} long: ${ubicacion.longitude}")

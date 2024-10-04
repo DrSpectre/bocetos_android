@@ -2,6 +2,7 @@ package mx.uacj.juegodedetective.pantallas
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,8 @@ import java.io.Serializable
 class PantallaPistas : AppCompatActivity() {
     lateinit var cajon_de_texto_pantalla_anterior: TextView
     lateinit var informacion_de_la_pista_cercana: InformacionPista
+
+    lateinit var marco_imagen: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +46,10 @@ class PantallaPistas : AppCompatActivity() {
         cajon_de_texto_pantalla_anterior = findViewById(R.id.caja_texto)
 
         cajon_de_texto_pantalla_anterior.text = informacion_de_la_pista_cercana.informacion
+
+        marco_imagen = findViewById(R.id.lugar_para_la_imagen)
+
+        marco_imagen.setImageResource(informacion_de_la_pista_cercana.imagen)
     }
 
 }
