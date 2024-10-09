@@ -20,7 +20,7 @@ class AdaptadorDeRecycleViewer(private val set_de_datos: Array<String>):
         val vista_pariente = LayoutInflater.from(parent.context)
             .inflate(R.layout.renglon_a_dibujar, parent, false)
 
-        return vista_pariente
+        return VistaDibujada(vista_pariente)
     }
 
     override fun onBindViewHolder(vista_siendo_dibujada: VistaDibujada, indice: Int) {
