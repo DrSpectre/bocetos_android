@@ -8,13 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import mx.uacj.usandorecylcerview.R
 
 class AdaptadorDeRecycleViewer(private val set_de_datos: Array<String>):
-                RecyclerView.Adapter<AdaptadorDeRecycleViewer.VistaDibujada> () {
-    class VistaDibujada(vista: View): RecyclerView.ViewHolder(vista){
-        val cajon_de_texto: TextView
-        init {
-            cajon_de_texto = vista.findViewById(R.id.cajon_texto)
-        }
-    }
+                RecyclerView.Adapter<VistaDibujada> () {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VistaDibujada {
         val vista_pariente = LayoutInflater.from(parent.context)
