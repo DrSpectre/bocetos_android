@@ -7,7 +7,7 @@ import retrofit2.http.Path
 
 interface ApiService {
     @GET("posts/")
-    fun obtener_todas_las_publicaciones(): Call<Publicacion>
+    fun obtener_todas_las_publicaciones(): Call<Array<Publicacion>>
 
     @GET("posts/{id}")
     fun obtener_publicacion(@Path("id") id_publicacion: Int): Call<Publicacion>

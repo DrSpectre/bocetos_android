@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import mx.uacj.usandorecylcerview.R
+import mx.uacj.usandorecylcerview.modelos.Publicacion
 
-class AdaptadorDeRecycleViewer(private val set_de_datos: Array<String>):
+class AdaptadorDeRecycleViewer(private val set_de_datos: Array<Publicacion>):
                 RecyclerView.Adapter<VistaDibujada> () {
 
 
@@ -19,7 +20,7 @@ class AdaptadorDeRecycleViewer(private val set_de_datos: Array<String>):
     }
 
     override fun onBindViewHolder(vista_siendo_dibujada: VistaDibujada, indice: Int) {
-        vista_siendo_dibujada.cajon_de_texto.text = set_de_datos[indice]
+        vista_siendo_dibujada.cajon_de_texto.text = set_de_datos[indice].title
     }
 
     override fun getItemCount(): Int {
