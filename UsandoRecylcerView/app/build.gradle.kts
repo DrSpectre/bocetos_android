@@ -49,6 +49,5 @@ dependencies {
     // Aqui estan las librerias para usar retrofit y conectarme a internet
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     // El que se encarga de convertir los archivos JSON a algo entendible
-    implementation("com.squareup.retrofit2:converter-scalar:2.9.0")
-
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 }
