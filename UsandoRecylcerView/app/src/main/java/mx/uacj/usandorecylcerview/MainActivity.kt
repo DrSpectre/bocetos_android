@@ -21,7 +21,9 @@ import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
-    private var publicaciones_a_desplegar: Array<Publicacion> = arrayOf()
+    //private var publicaciones_a_desplegar: Array<Publicacion> = arrayOf()
+
+    lateinit private var adaptador_recycle_view: AdaptadorDeRecycleViewer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,12 +41,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun inicializar_recicladores_de_vistas(){
-        val adapatador_modificado = AdaptadorDeRecycleViewer(publicaciones_a_desplegar)
+        adaptador_recycle_view = AdaptadorDeRecycleViewer()
+        adaptador_recycle_view.actualizar_datos()
 
         val recilador_de_vistas: RecyclerView = findViewById(R.id.vista_reciclador)
 
         recilador_de_vistas.layoutManager = LinearLayoutManager(this)
-        recilador_de_vistas.adapter = adapatador_modificado
+        recilador_de_vistas.adapter = adaptador_recycle_view
     }
 
     fun agregar_interaccion_botones(){
@@ -52,24 +55,7 @@ class MainActivity : AppCompatActivity() {
         
         boton_para_descargar_informacion.setOnClickListener {
             // val post_id = 1 // El id del post a descargar para hacer prueba de que funciona
-            val llamada_al_server = api_cliente.servicio_api.obtener_todas_las_publicaciones()
 
-            llamada_al_server.enqueue(object: Callback<Array<Publicacion>> {
-                override fun onResponse(call: Call<Array<Publicacion>>, response: Response<Array<Publicacion>>) {
-                    if(response.isSuccessful){
-                        val publicaciones_recibidas = response.body()!!
-                        publicaciones_a_desplegar = publicaciones_recibidas
-                        Log.v("EUREKA", "${publicaciones_a_desplegar.size}")
-                    }
-                    else{
-                        Log.v("Error en la peticion", response.message())
-                    }
-                }
-
-                override fun onFailure(call: Call<Array<Publicacion>>, t: Throwable) {
-                    Log.v("Error general", "Algo hiciste mal")
-                }
-            })
 
         }
     }
