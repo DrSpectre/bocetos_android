@@ -6,5 +6,9 @@ data class Publicacion(
     var id: Int,
     var title: String,
     var body: String
-)
+){
+    companion object{
+        val id_publicacion = "identificador_de_la_publicacion"
+    }
+}
 

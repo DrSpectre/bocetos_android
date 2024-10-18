@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun inicializar_recicladores_de_vistas(){
-        adaptador_recycle_view = AdaptadorDeRecycleViewer()
+        adaptador_recycle_view = AdaptadorDeRecycleViewer(this)
         adaptador_recycle_view.actualizar_datos()
 
         val recilador_de_vistas: RecyclerView = findViewById(R.id.vista_reciclador)
