@@ -8,12 +8,41 @@
     tools:context=".controladores_de_vistas.ControladorVistaPublicacion">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/cajon_texto_titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pantalla de la publicación"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="50sp"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/cajon_texto_cuerpo"
+        android:layout_width="367dp"
+        android:layout_height="114dp"
+        android:layout_marginTop="40dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cajon_texto_titulo" />
+
+    <TextView
+        android:id="@+id/cajon_texto_publicado_por"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="137dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cajon_texto_titulo" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle_view_comentarios"
+        android:layout_width="match_parent"
+        android:layout_height="406dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
