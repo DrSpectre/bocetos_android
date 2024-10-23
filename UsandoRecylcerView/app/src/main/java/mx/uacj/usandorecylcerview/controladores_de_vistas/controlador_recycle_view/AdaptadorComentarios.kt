@@ -38,19 +38,6 @@ class AdaptadorComentarios(private val id_de_publicacion: Int):
 
         vista_siendo_dibujada.itemView.setOnClickListener{
             Log.v("ESTAMOS EN EL VIND VIEW", "${comentarios_a_desplegar[indice].id}")
-            /*
-            var intento_para_cambiar_de_pantalla = Intent(it.context, ControladorVistaPublicacion::class.java)
-
-
-            intento_para_cambiar_de_pantalla
-                .putExtra(
-                    Publicacion.id_publicacion,
-                    comentarios_a_desplegar[indice].id
-                )
-
-            // Aqui buscaremos como resolver la llamada al start activity
-            padre.startActivity(intento_para_cambiar_de_pantalla)
-            */
         }
     }
 

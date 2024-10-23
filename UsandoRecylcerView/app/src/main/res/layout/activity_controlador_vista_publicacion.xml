@@ -9,18 +9,21 @@
 
     <TextView
         android:id="@+id/cajon_texto_titulo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Pantalla de la publicación"
-        android:textSize="50sp"
+        android:textSize="45sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/cajon_texto_cuerpo"
-        android:layout_width="367dp"
+        android:layout_width="0dp"
         android:layout_height="114dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:layout_marginTop="40dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,19 +33,25 @@
 
     <TextView
         android:id="@+id/cajon_texto_publicado_por"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="137dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="25dp"
         android:text="TextView"
+        android:textAlignment="viewEnd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cajon_texto_titulo" />
+        app:layout_constraintTop_toBottomOf="@+id/cajon_texto_titulo" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_view_comentarios"
-        android:layout_width="match_parent"
-        android:layout_height="406dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cajon_texto_cuerpo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
