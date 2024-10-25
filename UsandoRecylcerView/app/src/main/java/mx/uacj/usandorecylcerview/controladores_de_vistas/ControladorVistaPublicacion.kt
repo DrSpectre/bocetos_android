@@ -1,5 +1,6 @@
 package mx.uacj.usandorecylcerview.controladores_de_vistas
 
+import android.app.usage.UsageStats
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
@@ -14,6 +15,7 @@ import mx.uacj.usandorecylcerview.api.api_cliente
 import mx.uacj.usandorecylcerview.controladores_de_vistas.controlador_recycle_view.AdaptadorComentarios
 import mx.uacj.usandorecylcerview.controladores_de_vistas.controlador_recycle_view.AdaptadorDeRecycleViewer
 import mx.uacj.usandorecylcerview.modelos.Publicacion
+import mx.uacj.usandorecylcerview.modelos.Usuario
 import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,6 +30,7 @@ class ControladorVistaPublicacion : AppCompatActivity() {
     private lateinit var adaptador_comentarios: AdaptadorComentarios
 
     private var publicacion_a_desplegar: Publicacion? = null
+    private var usuario_de_la_publicacion: Usuario? = null
     private var id_de_publicaicon_a_descargar: Int = -1
 
 
@@ -68,8 +71,9 @@ class ControladorVistaPublicacion : AppCompatActivity() {
                     publicacion_a_desplegar = publicacion
 
                     colocar_publicacion()
+                    descargar_informacion_usuario()
 
-                    Log.v("EUREKA", "${publicacion.title}")
+                    Log.v("EUREKA", "${publicacion.userId}")
                 }
                 else{
                     Log.v("Error en la peticion", response.message())
@@ -77,6 +81,31 @@ class ControladorVistaPublicacion : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<Publicacion>, t: Throwable) {
+                Log.v("Error general", "Algo hiciste mal")
+            }
+        })
+    }
+
+    fun descargar_informacion_usuario(){
+        var id_de_usuario_a_descargar = publicacion_a_desplegar!!.userId
+
+        val llamada_al_server = api_cliente.servicio_api.obtener_usuario(id_de_usuario_a_descargar)
+
+        llamada_al_server.enqueue(object: Callback<Usuario> {
+            override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
+                if(response.isSuccessful){
+                    val usuario = response.body()!!
+                    usuario_de_la_publicacion = usuario
+
+                    colocar_usuario()
+
+                }
+                else{
+                    Log.v("Error en la peticion[Usuario]", response.message())
+                }
+            }
+
+            override fun onFailure(call: Call<Usuario>, t: Throwable) {
                 Log.v("Error general", "Algo hiciste mal")
             }
         })
@@ -97,6 +126,10 @@ class ControladorVistaPublicacion : AppCompatActivity() {
         donde_poner_cuerpo_publicacion.text = publicacion_a_desplegar?.body
 
 
+    }
+
+    fun colocar_usuario(){
+        donde_poner_nombre_usuario.text = usuario_de_la_publicacion!!.username
     }
 
 }
