@@ -1,60 +1,47 @@
 package mx.uacj.aplicacionfragmentos.pantallas_fragmentos
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.fragment.app.viewModels
 import mx.uacj.aplicacionfragmentos.R
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+public const val datos_a_recibir = "datos_a_recibir_1"
+private const val ARG_PARAM2 = ""
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PantallaDos.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PantallaDos : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val modelo_de_datos by viewModels<InformacionCompartida>()
+
+    private lateinit var cajon_de_textp: TextView
+    private lateinit var datos_recibidos: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            datos_recibidos = it.getString(datos_a_recibir).toString()
+            Log.v("EUREKA", "Recibimos de bundle sandwich el valor ${datos_recibidos}")
         }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        Log.v("ACTUALIZACION", "El valor de variable es ${modelo_de_datos} en PantallaDos")
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pantalla_dos, container, false)
+        var vista_pantalla_dos = inflater.inflate(R.layout.fragment_pantalla_dos, container, false)
+        cajon_de_textp = vista_pantalla_dos.findViewById(R.id.cajon_de_texto_pantalla_2)
+        cajon_de_textp.text = "Se ha pulsado el boton ${modelo_de_datos.variable}"
+        return vista_pantalla_dos
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PantallaDos.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PantallaDos().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

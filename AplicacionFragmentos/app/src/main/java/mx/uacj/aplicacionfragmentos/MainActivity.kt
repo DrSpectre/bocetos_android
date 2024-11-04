@@ -1,6 +1,7 @@
 package mx.uacj.aplicacionfragmentos
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -14,9 +15,12 @@ import androidx.fragment.app.replace
 import mx.uacj.aplicacionfragmentos.pantallas_fragmentos.InformacionCompartida
 import mx.uacj.aplicacionfragmentos.pantallas_fragmentos.PantallaDos
 import mx.uacj.aplicacionfragmentos.pantallas_fragmentos.PantallaUno
+import mx.uacj.aplicacionfragmentos.pantallas_fragmentos.datos_a_recibir
 
 class MainActivity : AppCompatActivity() {
-    private val modelo_datos by viewModels<InformacionCompartida>()
+    // private val modelo_datos by viewModels<InformacionCompartida>()
+
+    private val modelo_de_datos by viewModels<InformacionCompartida>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -42,8 +46,14 @@ class MainActivity : AppCompatActivity() {
         val boton = findViewById<Button>(R.id.boton_para_hacer_cosas)
 
         boton.setOnClickListener {
+            modelo_de_datos.variable += 1
+
+            var sandwich_de_datos = bundleOf(datos_a_recibir to "Esto de aqui es inforamcion que recibo")
+
+            Log.v("ACTUALIZACION", "El valor de variable es ${modelo_de_datos} en MAinActivity")
+
             supportFragmentManager.commit {
-                replace<PantallaDos>(R.id.contenedor_vista_sencilla_de_fragment)
+                replace<PantallaDos>(R.id.contenedor_vista_sencilla_de_fragment, args = sandwich_de_datos)
                 setReorderingAllowed(true)
                 addToBackStack(null)
             }
