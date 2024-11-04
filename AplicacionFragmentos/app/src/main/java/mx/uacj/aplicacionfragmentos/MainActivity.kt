@@ -3,6 +3,7 @@ package mx.uacj.aplicacionfragmentos
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
@@ -10,10 +11,12 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import mx.uacj.aplicacionfragmentos.pantallas_fragmentos.InformacionCompartida
 import mx.uacj.aplicacionfragmentos.pantallas_fragmentos.PantallaDos
 import mx.uacj.aplicacionfragmentos.pantallas_fragmentos.PantallaUno
 
 class MainActivity : AppCompatActivity() {
+    private val modelo_datos by viewModels<InformacionCompartida>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
