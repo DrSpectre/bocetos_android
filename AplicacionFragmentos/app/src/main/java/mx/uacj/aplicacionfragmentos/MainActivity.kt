@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity() {
     // private val modelo_datos by viewModels<InformacionCompartida>()
 
     private val modelo_de_datos by viewModels<InformacionCompartida>()
+
+    private var estoy_en_pantalla_dos: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -47,15 +49,22 @@ class MainActivity : AppCompatActivity() {
 
         boton.setOnClickListener {
             modelo_de_datos.variable += 1
+            // modelo_de_datos.agregar_un_click()
 
             var sandwich_de_datos = bundleOf(datos_a_recibir to "Esto de aqui es inforamcion que recibo")
 
             Log.v("ACTUALIZACION", "El valor de variable es ${modelo_de_datos} en MAinActivity")
 
-            supportFragmentManager.commit {
-                replace<PantallaDos>(R.id.contenedor_vista_sencilla_de_fragment, args = sandwich_de_datos)
-                setReorderingAllowed(true)
-                addToBackStack(null)
+            if(!estoy_en_pantalla_dos){
+                supportFragmentManager.commit {
+                    replace<PantallaDos>(R.id.contenedor_vista_sencilla_de_fragment, args = sandwich_de_datos)
+                    setReorderingAllowed(true)
+                    addToBackStack(null)
+                }
+
+                Log.v("ACTUALIZACION", "Intentamos cambiar a pantalla dos")
+
+                estoy_en_pantalla_dos = true
             }
         }
     }
