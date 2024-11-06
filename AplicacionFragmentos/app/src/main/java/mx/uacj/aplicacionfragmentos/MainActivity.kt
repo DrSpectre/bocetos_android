@@ -48,8 +48,7 @@ class MainActivity : AppCompatActivity() {
         val boton = findViewById<Button>(R.id.boton_para_hacer_cosas)
 
         boton.setOnClickListener {
-            modelo_de_datos.variable += 1
-            // modelo_de_datos.agregar_un_click()
+            modelo_de_datos.agregar_un_click()
 
             var sandwich_de_datos = bundleOf(datos_a_recibir to "Esto de aqui es inforamcion que recibo")
 

@@ -8,6 +8,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.launch
 import mx.uacj.aplicacionfragmentos.R
 
 
@@ -25,6 +29,17 @@ class PantallaUno : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(parametro_1)
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                modelo_de_datos.mutante_numero_clicks.collect { evento ->
+                    when(evento){
+                        is EstadosData.Error -> cajon_texto.text = "TEnemos un error en ${evento.error}. Por favor contactar administración"
+                        is EstadosData.NumeroDeClicks -> cajon_texto.text = "Has pulsado el boton de cambiar vistas: ${evento.clicks}"
+                    }
+                }
+            }
         }
 
     }
