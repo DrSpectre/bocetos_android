@@ -19,7 +19,13 @@ class InformacionCompartida: ViewModel() {
     val mutante_numero_clicks: StateFlow<EstadosData> = _mutante_numero_clicks
     fun agregar_un_click(){
         val clicks_anteriores = _mutante_numero_clicks.value.clicks
+
+        if(clicks_anteriores > 20){
+            //_mutante_numero_clicks. = EstadosData.Error("Has pulsado demasaidas veces el boton")
+        }
         _mutante_numero_clicks.value = EstadosData.NumeroDeClicks(clicks_anteriores + 1)
+
+
     }
     override fun onCleared() {
         super.onCleared()

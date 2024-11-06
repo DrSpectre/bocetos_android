@@ -20,7 +20,7 @@ public const val datos_a_recibir = "datos_a_recibir_1"
 private const val ARG_PARAM2 = ""
 
 class PantallaDos : Fragment() {
-    private val modelo_de_datos by viewModels<InformacionCompartida>(ownerProducer = {requireActivity()})
+    private val modelo_de_datos by viewModels<InformacionCompartida>(ownerProducer = { requireActivity() })
 
     private lateinit var cajon_de_textp: TextView
     private lateinit var datos_recibidos: String
