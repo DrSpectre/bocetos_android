@@ -49,4 +49,9 @@ dependencies {
     // Librerias para usar el fragment view en android
     val version_fragment = "1.8.4"
     implementation("androidx.fragment:fragment-ktx:${version_fragment}")
+
+    //Librerias para usar el Navigation Graph
+    val version_navigation_graph = "2.8.3"
+    implementation("androidx.navigation:navigation-fragment-ktx:${version_navigation_graph}")
+    implementation("androidx.navigation:navigation-ui-ktx:${version_navigation_graph}")
 }

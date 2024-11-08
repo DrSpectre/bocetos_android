@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 import mx.uacj.aplicacionfragmentos.R
 
@@ -52,6 +53,11 @@ class PantallaUno : Fragment() {
 
         cajon_texto = vista_de_pantalla_uno.findViewById(R.id.cajon_de_texto_de_pantalla_1)
         // cajon_texto.text = "Has pulsado el boton de cambiar vistas: ${modelo_de_datos.variable}"
+
+        val boton_para_cambiar_pantalla: Button = vista_de_pantalla_uno.findViewById(R.id.boton_mover_a_pantalla_4)
+        boton_para_cambiar_pantalla.setOnClickListener {
+            findNavController().navigate(R.id.action_pantallaUno_to_cuartaPantalla2)
+        }
 
         return vista_de_pantalla_uno
     }

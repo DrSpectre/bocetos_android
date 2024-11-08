@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navegacion_principal"
+    app:startDestination="@id/pantallaUno">
+
+    <fragment
+        android:id="@+id/pantallaDos"
+        android:name="mx.uacj.aplicacionfragmentos.pantallas_fragmentos.PantallaDos"
+        android:label="fragment_pantalla_dos"
+        tools:layout="@layout/fragment_pantalla_dos" >
+        <action
+            android:id="@+id/action_pantallaDos_to_cuartaPantalla"
+            app:destination="@id/cuartaPantalla" />
+    </fragment>
+    <fragment
+        android:id="@+id/pantallaUno"
+        android:name="mx.uacj.aplicacionfragmentos.pantallas_fragmentos.PantallaUno"
+        android:label="fragment_pantalla_uno"
+        tools:layout="@layout/fragment_pantalla_uno" >
+        <action
+            android:id="@+id/action_pantallaUno_to_cuartaPantalla2"
+            app:destination="@id/cuartaPantalla" />
+    </fragment>
+    <fragment
+        android:id="@+id/cuartaPantalla"
+        android:name="mx.uacj.aplicacionfragmentos.pantallas_fragmentos.CuartaPantalla"
+        android:label="fragment_cuarta_pantalla"
+        tools:layout="@layout/fragment_cuarta_pantalla" />
+    <fragment
+        android:id="@+id/tercerPantalla"
+        android:name="mx.uacj.aplicacionfragmentos.pantallas_fragmentos.TercerPantalla"
+        android:label="fragment_tercer_pantalla"
+        tools:layout="@layout/fragment_tercer_pantalla" />
+</navigation>

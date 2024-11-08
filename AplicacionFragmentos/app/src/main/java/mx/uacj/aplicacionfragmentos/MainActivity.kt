@@ -12,6 +12,10 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import mx.uacj.aplicacionfragmentos.pantallas_fragmentos.InformacionCompartida
 import mx.uacj.aplicacionfragmentos.pantallas_fragmentos.PantallaDos
 import mx.uacj.aplicacionfragmentos.pantallas_fragmentos.PantallaUno
@@ -33,15 +37,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        if(savedInstanceState == null){
-            val infromacion_a_pasar = bundleOf(PantallaUno().parametro_1 to "Informacion que cura")
-            supportFragmentManager.commit {
-                add<PantallaUno>(R.id.contenedor_vista_sencilla_de_fragment, args = infromacion_a_pasar)
-                setReorderingAllowed(true)
-            }
-        }
-
         crear_interaccion()
+        agregar_menu_inferior_funcionalidad()
     }
 
     fun crear_interaccion(){
@@ -50,21 +47,17 @@ class MainActivity : AppCompatActivity() {
         boton.setOnClickListener {
             modelo_de_datos.agregar_un_click()
 
-            var sandwich_de_datos = bundleOf(datos_a_recibir to "Esto de aqui es inforamcion que recibo")
-
             Log.v("ACTUALIZACION", "El valor de variable es ${modelo_de_datos} en MAinActivity")
 
-            if(!estoy_en_pantalla_dos){
-                supportFragmentManager.commit {
-                    replace<PantallaDos>(R.id.contenedor_vista_sencilla_de_fragment, args = sandwich_de_datos)
-                    setReorderingAllowed(true)
-                    addToBackStack(null)
-                }
 
-                Log.v("ACTUALIZACION", "Intentamos cambiar a pantalla dos")
-
-                estoy_en_pantalla_dos = true
-            }
         }
+    }
+
+    fun agregar_menu_inferior_funcionalidad(){
+        val host_navegacion: NavHostFragment = supportFragmentManager.findFragmentById(R.id.mi_pantalla_navegacion) as NavHostFragment
+
+        val controlador_de_navegacion: NavController = host_navegacion.navController
+
+        findViewById<BottomNavigationView>(R.id.navegacion_inferior_menu).setupWithNavController(controlador_de_navegacion)
     }
 }

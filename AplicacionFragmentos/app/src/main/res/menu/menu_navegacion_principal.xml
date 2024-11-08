@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/pantallaUno"
+        android:title="Pantalla Uno"
+        android:icon="@drawable/ic_launcher_background" />
+    <item
+        android:id="@+id/pantallaDos"
+        android:title="Pantalla Dos"
+        android:icon="@drawable/ic_launcher_background" />
+    <item
+        android:id="@+id/tercerPantalla"
+        android:title="Pantalla Tres"
+        android:icon="@drawable/ic_launcher_background" />
+</menu>
