@@ -32,7 +32,7 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 
 # Aqui importamos las librerias de configruacion para utilizar Navigation Compose
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "versionNavigationCompose" }
-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlix-serialization-json", version.ref = "versionKotlinxSerialization" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "versionKotlinxSerialization" }
 
 # jetbrains-kotlin-android = {id = "org.jetbrains.kotlin.android", version.ref="kotlin"}
 
