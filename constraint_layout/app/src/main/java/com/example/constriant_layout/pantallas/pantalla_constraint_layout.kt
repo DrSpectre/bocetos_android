@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.constriant_layout.ui.theme.Purple80
 
@@ -30,7 +31,12 @@ fun PantallaDeCuadros(){
         val (caja_a, caja_b, caja_c, caja_d, caja_e, caja_f ) = createRefs()
         val (caja_g, caja_h, caja_i ) = createRefs()
 
-        Box(modifier = Modifier.size(75.dp).background(Color.Black).constrainAs(caja_a){
+        val tamaño_de_cajas = 75.dp
+
+        val cajas_tercer_fila_chain = createHorizontalChain(caja_e, caja_d, caja_f,
+                    chainStyle = ChainStyle.Spread)
+
+        Box(modifier = Modifier.size(tamaño_de_cajas).background(Color.Black).constrainAs(caja_a){
             top.linkTo(parent.top)
             start.linkTo(parent.start)
             end.linkTo(parent.end)
@@ -43,7 +49,7 @@ fun PantallaDeCuadros(){
         }
 
         Box(modifier = Modifier
-            .size(75.dp)
+            .size(tamaño_de_cajas)
             .background(Brush.linearGradient(gradiente))
             .constrainAs(caja_b) {
             top.linkTo(caja_a.bottom, margin = 15.dp)
@@ -55,7 +61,7 @@ fun PantallaDeCuadros(){
 
         Button(onClick = {}, modifier = Modifier
             .constrainAs(caja_c) {
-                top.linkTo(caja_a.top, margin = 50.dp)
+                top.linkTo(caja_a.bottom, margin = 15.dp)
                 start.linkTo(caja_b.end)
                 end.linkTo(parent.end)
             }
