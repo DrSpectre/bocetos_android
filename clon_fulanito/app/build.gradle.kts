@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+
+    // Plugins para utilziar el navigation compose en mi entorno
+    alias(libs.plugins.jetbrainsKotlinSerialization)
 }
 
 android {
@@ -68,4 +71,8 @@ dependencies {
 
     // Libreria apra checar la informacion en tiempo real.
     implementation("androidx.compose.runtime:runtime-livedata:1.7.8")
+
+    // Navigation compose
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
 }
