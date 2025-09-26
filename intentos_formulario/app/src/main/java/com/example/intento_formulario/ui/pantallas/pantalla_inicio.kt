@@ -1,5 +1,6 @@
 package com.example.intento_formulario.ui.pantallas
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,6 +19,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.intento_formulario.ui.atomos.ComponenteBasico
 
 enum class OpcionesDisponibles{
     opcion_1,
@@ -38,7 +40,8 @@ fun PantallaInicio(modificador: Modifier = Modifier){
         Row(modifier = Modifier.fillMaxWidth()) { // Aqui incluyo un checkbox
             Text("¿Quieres palomitas?")
 
-            Checkbox(checked = cajita_palomeada,
+            Checkbox(
+                checked = cajita_palomeada,
                 onCheckedChange = { nuevo_valor -> cajita_palomeada = nuevo_valor }
             )
             Column {
@@ -53,33 +56,36 @@ fun PantallaInicio(modificador: Modifier = Modifier){
             }
         }
         
+        if(cajita_palomeada){
+            Row{ // Un Boton Radial
+                Column {
+                    Text("¿Qué sabor de palomitas quieres?")
 
-        Row{ // Un Boton Radial
-            Column {
-                Text("¿Qué sabor de palomitas quieres?")
+                    Row{
+                        Row {
+                            RadioButton(
+                                selected = (opcion_seleccionada_de_multiples_opciones == OpcionesDisponibles.opcion_1),
+                                onClick = { opcion_seleccionada_de_multiples_opciones = OpcionesDisponibles.opcion_1 }
+                            )
+                            Text("Caramelo", modifier = Modifier.padding(15.dp))
+                        }
 
-                Row{
-                    Row {
-                        RadioButton(
-                            selected = (opcion_seleccionada_de_multiples_opciones == OpcionesDisponibles.opcion_1),
-                            onClick = { opcion_seleccionada_de_multiples_opciones = OpcionesDisponibles.opcion_1 }
-                        )
-                        Text("Caramelo", modifier = Modifier.padding(15.dp))
+                        Row {
+                            RadioButton(
+                                selected = (opcion_seleccionada_de_multiples_opciones == OpcionesDisponibles.opcion_2),
+                                onClick = { opcion_seleccionada_de_multiples_opciones = OpcionesDisponibles.opcion_2 }
+                            )
+                            Text("Flaming Hot", modifier = Modifier.padding(15.dp))
+                        }
                     }
 
-                    Row {
-                        RadioButton(
-                            selected = (opcion_seleccionada_de_multiples_opciones == OpcionesDisponibles.opcion_2),
-                            onClick = { opcion_seleccionada_de_multiples_opciones = OpcionesDisponibles.opcion_2 }
-                        )
-                        Text("Flaming Hot", modifier = Modifier.padding(15.dp))
-                    }
                 }
-
             }
         }
-
-
+        ComponenteBasico(estado = cajita_palomeada, al_puchopicar = {
+            Log.v("Componente básico", "Se ha pulsaod el componente")
+            cajita_palomeada = !cajita_palomeada
+        })
     }
 }
 
