@@ -12,6 +12,10 @@ composeBom = "2024.04.01"
 # Version de la dependencia para tener un Navigation Compose
 navigationComposeAndroid = "2.9.5"
 
+# Version para serilziar JSON
+kolinxSerialization = "1.6.3"
+kotlinParcelize = "1.8.10"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -28,6 +32,9 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
+# Libreria para utilizar el serialization o parcelizar de Kotlin Class a JSON
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref  = "kolinxSerialization" }
+
 # Libreria para descargar los archivos necesarios para Navigation Compsoe
 androidx-navigation-compose-android = { group = "androidx.navigation", name = "navigation-compose-android", version.ref = "navigationComposeAndroid" }
 
@@ -35,4 +42,9 @@ androidx-navigation-compose-android = { group = "androidx.navigation", name = "n
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+# jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin"}
+jetbrainsKotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlinParcelize" }
+
 
