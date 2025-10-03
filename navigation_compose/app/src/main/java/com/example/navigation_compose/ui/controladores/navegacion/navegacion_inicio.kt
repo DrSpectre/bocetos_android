@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -19,8 +20,8 @@ import com.example.navigation_compose.ui.pantallas.PantallaVideo
 import java.util.concurrent.locks.Condition
 
 @Composable
-fun NavegacionInicio(modificador: Modifier = Modifier){
-    val controlador_de_navegacion = rememberNavController()
+fun NavegacionInicio(modificador: Modifier = Modifier, controlador_de_navegacion: NavHostController){
+    // val controlador_de_navegacion = rememberNavController()
 
     NavHost(navController = controlador_de_navegacion, startDestination = Inicio){
         composable<Inicio> {
@@ -31,6 +32,8 @@ fun NavegacionInicio(modificador: Modifier = Modifier){
             PantallaVideo(modificador, controlador_de_navegacion)
 
         }
+
+
 
         composable<Configuracion> {
             Column(modifier = modificador
