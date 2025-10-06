@@ -55,6 +55,13 @@ dependencies {
     implementation("androidx.hilt:hilt-work:${androidxhiltCompiler}")
     ksp("androidx.hilt:hilt-compiler:${androidxhiltCompiler}")
 
+    // Para instalar Retrofit
+    implementation(libs.okhttp)
+    implementation(libs.retrofit)
+    implementation(libs.gson.converter)
+    implementation(libs.login.interceptor)
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
