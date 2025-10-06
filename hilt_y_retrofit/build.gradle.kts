@@ -6,4 +6,8 @@ plugins {
 
     // Integracion al proyecto deo uso de KSP como herramienta de desarrollo
     alias(libs.plugins.kotlin.ksp) apply false
+
+    /// Si algo falla, cambiar este primero por favor
+    // Para integrar Hilt en el proyecto
+    id("com.google.dagger.hilt.android") version "2.56" apply false
 }
