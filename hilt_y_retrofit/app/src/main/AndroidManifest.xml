@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name="com.example.hilt_y_retrofit.AplicacionBase"
+        
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
