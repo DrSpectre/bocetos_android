@@ -55,6 +55,9 @@ dependencies {
     implementation("androidx.hilt:hilt-work:${androidxhiltCompiler}")
     ksp("androidx.hilt:hilt-compiler:${androidxhiltCompiler}")
 
+    // Dependencia para Hilt y evitar errores extraños
+    implementation("androidx.work:work-runtime-ktx:2.7.0")
+
     // Para instalar Retrofit
     implementation(libs.okhttp)
     implementation(libs.retrofit)
