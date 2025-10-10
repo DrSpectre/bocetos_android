@@ -7,11 +7,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.hilt_y_retrofit.ui.pantallas.Greeting
+import com.example.hilt_y_retrofit.ui.controladores.NavegacionPrincipal
+import com.example.hilt_y_retrofit.ui.pantallas.ListaPublicaciones
 import com.example.hilt_y_retrofit.ui.theme.Hilt_y_retrofitTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,10 +23,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Hilt_y_retrofitTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    NavegacionPrincipal(Modifier.padding(innerPadding))
                 }
             }
         }
@@ -39,6 +36,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     Hilt_y_retrofitTheme {
-        Greeting("Android")
+        NavegacionPrincipal()
     }
 }
