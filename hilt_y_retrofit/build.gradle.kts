@@ -10,4 +10,7 @@ plugins {
     /// Si algo falla, cambiar este primero por favor
     // Para integrar Hilt en el proyecto
     id("com.google.dagger.hilt.android") version "2.56" apply false
+    // Para usar Parcelize
+    alias(libs.plugins.kotlin.parcelize) apply false
+
 }
