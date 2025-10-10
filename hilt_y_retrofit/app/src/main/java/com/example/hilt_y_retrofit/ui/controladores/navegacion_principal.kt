@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.hilt_y_retrofit.ui.pantallas.ListaPublicaciones
+import com.example.hilt_y_retrofit.ui.pantallas.PantallaPublicacion
 
 @Composable
 fun NavegacionPrincipal(modificador: Modifier = Modifier){
@@ -14,11 +15,11 @@ fun NavegacionPrincipal(modificador: Modifier = Modifier){
 
     NavHost(navController = control_navegacion, startDestination = PantallaListaPublicaiciones){
         composable<PantallaListaPublicaiciones> {
-            ListaPublicaciones(modificador)
+            ListaPublicaciones(modificador, navegar_a_publiacion = { control_navegacion.navigate(PantallaPublicacion) })
         }
 
         composable<PantallaPublicacion> {
-            Text("Te falta implementar esta pantalla")
+           PantallaPublicacion(modificador)
         }
 
     }

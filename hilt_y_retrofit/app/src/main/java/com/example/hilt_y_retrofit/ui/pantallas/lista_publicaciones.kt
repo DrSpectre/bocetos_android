@@ -1,5 +1,7 @@
 package com.example.hilt_y_retrofit.ui.pantallas
 
+import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -14,17 +16,24 @@ import com.example.hilt_y_retrofit.controladores.ControladorPublicaciones
 @Composable
 fun ListaPublicaciones(
         modificador: Modifier = Modifier,
-        controlodar_publicaciones: ControladorPublicaciones = hiltViewModel()
+        controlodar_publicaciones: ControladorPublicaciones = hiltViewModel(),
+        navegar_a_publiacion: () -> Unit = {}
 ) {
-    val controlador_de_navegacion = rememberNavController()
+    Log.v("PantallaPublicacion", "Valor del cotnrolador: ${controlodar_publicaciones}")
 
     controlodar_publicaciones.obtener_publicaciones()
 
     if(controlodar_publicaciones.publicaciones.value.size > 0){
         Column(modifier = Modifier.verticalScroll(rememberScrollState())){
             for(publicacion in controlodar_publicaciones.publicaciones.value){
-                Text("Publicacion: ${publicacion.title}")
-                Text("${publicacion.body}")
+                Column(modifier = Modifier.clickable {
+                        controlodar_publicaciones.seleccionar_publicacion(id = publicacion.id)
+                        navegar_a_publiacion()
+                    }) {
+                    Text("Publicacion: ${publicacion.title}")
+                    Text("${publicacion.body}")
+                }
+
             }
         }
     }
